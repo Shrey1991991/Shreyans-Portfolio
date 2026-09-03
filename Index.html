@@ -1,0 +1,769 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shreyans Patil</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --paper:#EEF1F4;
+    --paper-raised:#FFFFFF;
+    --ink:#16202B;
+    --ink-soft:#3C4A56;
+    --steel:#66727C;
+    --line:#D3DBE1;
+    --line-strong:#AEB9C2;
+    --accent:#C9722A;
+    --accent-soft:#F1D9BE;
+    --accent-ink:#7A4218;
+    --navy-deep:#0F1720;
+    --navy-deep-ink:#DDE4EA;
+    --navy-deep-steel:#93A2AE;
+    --navy-deep-line:#28333D;
+    --focus:#1D5FA6;
+    --shadow:0 1px 2px rgba(15,23,32,.08);
+    --font-display:'Big Shoulders Display','Arial Narrow',sans-serif;
+    --font-body:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --font-mono:'IBM Plex Mono','SFMono-Regular',Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#10161D;
+      --paper-raised:#161F29;
+      --ink:#EDEFF2;
+      --ink-soft:#C3CBD1;
+      --steel:#8B98A3;
+      --line:#26313C;
+      --line-strong:#34424E;
+      --accent:#E08A3D;
+      --accent-soft:#4A3116;
+      --accent-ink:#F3D2AA;
+      --navy-deep:#0A0F14;
+      --navy-deep-ink:#EDEFF2;
+      --navy-deep-steel:#8B98A3;
+      --navy-deep-line:#232E38;
+      --focus:#6FA8DC;
+      --shadow:0 1px 3px rgba(0,0,0,.5);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#10161D;
+    --paper-raised:#161F29;
+    --ink:#EDEFF2;
+    --ink-soft:#C3CBD1;
+    --steel:#8B98A3;
+    --line:#26313C;
+    --line-strong:#34424E;
+    --accent:#E08A3D;
+    --accent-soft:#4A3116;
+    --accent-ink:#F3D2AA;
+    --navy-deep:#0A0F14;
+    --navy-deep-ink:#EDEFF2;
+    --navy-deep-steel:#8B98A3;
+    --navy-deep-line:#232E38;
+    --focus:#6FA8DC;
+    --shadow:0 1px 3px rgba(0,0,0,.5);
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  img,svg{ max-width:100%; }
+
+  .sr-only{
+    position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+    overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+  }
+
+  .skip-link{
+    position:absolute; left:12px; top:-48px;
+    background:var(--ink); color:var(--paper);
+    padding:10px 16px; border-radius:2px; font-family:var(--font-mono);
+    font-size:.85rem; z-index:100; transition:top .2s ease;
+  }
+  .skip-link:focus{ top:12px; }
+
+  a{ color:inherit; }
+  :focus-visible{ outline:2px solid var(--focus); outline-offset:3px; }
+
+  h1,h2,h3{ font-family:var(--font-display); font-weight:700; margin:0; text-wrap:balance; letter-spacing:.01em; }
+
+  .container{ max-width:1160px; margin-inline:auto; padding-inline:clamp(20px,4vw,40px); }
+
+  /* ---------- corner-bracket motif ---------- */
+  .bracketed{ position:relative; }
+  .bracketed::before,
+  .bracketed::after{
+    content:""; position:absolute; width:10px; height:10px;
+    border:1.5px solid var(--accent); opacity:.85;
+  }
+  .bracketed::before{ top:-1px; left:-1px; border-right:none; border-bottom:none; }
+  .bracketed::after{ bottom:-1px; right:-1px; border-left:none; border-top:none; }
+
+  /* ---------- header ---------- */
+  .site-header{
+    position:sticky; top:0; z-index:50;
+    background:color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter:blur(10px) saturate(140%);
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{
+    max-width:1160px; margin-inline:auto; padding:14px clamp(20px,4vw,40px);
+    display:flex; align-items:center; gap:20px;
+  }
+  .brand{ display:flex; align-items:baseline; gap:10px; text-decoration:none; margin-right:auto; }
+  .brand-mark{
+    font-family:var(--font-display); font-weight:800; font-size:1.4rem;
+    color:var(--ink); border:1.5px solid var(--ink); padding:1px 8px; line-height:1.3;
+  }
+  .brand-code{ font-family:var(--font-mono); font-size:.7rem; color:var(--steel); letter-spacing:.08em; }
+
+  .site-nav{ display:flex; align-items:center; }
+  .nav-list{
+    display:flex; gap:28px; list-style:none; margin:0; padding:0;
+    font-family:var(--font-mono); font-size:.82rem; letter-spacing:.03em; text-transform:uppercase;
+  }
+  .nav-list a{ text-decoration:none; color:var(--ink-soft); position:relative; padding:4px 0; }
+  .nav-list a::after{
+    content:""; position:absolute; left:0; right:100%; bottom:0; height:2px; background:var(--accent);
+    transition:right .25s ease;
+  }
+  .nav-list a:hover::after,
+  .nav-list a.is-active::after{ right:0; }
+  .nav-list a.is-active{ color:var(--ink); }
+
+  .header-cta{
+    font-family:var(--font-mono); font-size:.78rem; text-transform:uppercase; letter-spacing:.04em;
+    text-decoration:none; border:1.5px solid var(--ink); color:var(--ink); padding:8px 14px; white-space:nowrap;
+    transition:background .2s ease, color .2s ease;
+  }
+  .header-cta:hover{ background:var(--ink); color:var(--paper); }
+
+  .nav-toggle{
+    display:none; flex-direction:column; justify-content:center; gap:5px;
+    width:36px; height:32px; background:none; border:1.5px solid var(--line-strong); cursor:pointer; padding:0 7px;
+  }
+  .nav-toggle span{ display:block; height:2px; background:var(--ink); border-radius:1px; }
+
+  @media (max-width: 760px){
+    .header-cta{ display:none; }
+    .nav-toggle{ display:flex; }
+    .site-nav{ position:relative; }
+    .nav-list{
+      position:absolute; top:calc(100% + 14px); right:0; left:auto;
+      flex-direction:column; gap:2px; background:var(--paper-raised);
+      border:1px solid var(--line); box-shadow:var(--shadow); min-width:200px;
+      padding:8px; display:none;
+    }
+    .nav-list.is-open{ display:flex; }
+    .nav-list a{ display:block; padding:10px 12px; }
+    .nav-list a::after{ display:none; }
+    .nav-list a.is-active{ background:var(--accent-soft); color:var(--accent-ink); }
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding:clamp(48px,8vw,88px) 0 clamp(40px,6vw,64px);
+    border-bottom:1px solid var(--line);
+  }
+  .hero .container{
+    display:grid; grid-template-columns:minmax(0,1fr) 230px; gap:clamp(28px,5vw,64px); align-items:start;
+  }
+  .eyebrow{
+    font-family:var(--font-mono); font-size:.78rem; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--accent-ink); background:var(--accent-soft); display:inline-block; padding:4px 10px; margin:0 0 20px;
+  }
+  .hero-title{ font-size:clamp(3rem,8vw,5.4rem); line-height:.94; margin-bottom:14px; }
+  .hero-line{ margin:6px 0 22px; max-width:420px; }
+  .toolpath-svg{ width:100%; height:34px; display:block; overflow:visible; }
+  .toolpath-svg path{
+    fill:none; stroke:var(--accent); stroke-width:3; stroke-linecap:round; stroke-linejoin:round;
+  }
+  .toolpath-svg circle{ fill:var(--accent); }
+  @media (prefers-reduced-motion: no-preference){
+    .toolpath-svg path{
+      stroke-dasharray:900; stroke-dashoffset:900;
+      animation:draw 2.2s cubic-bezier(.65,0,.35,1) .3s forwards;
+    }
+    .toolpath-svg circle{ opacity:0; animation:dot .3s ease .3s forwards; animation-delay:2.4s; }
+  }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+  @keyframes dot{ to{ opacity:1; } }
+
+  .hero-role{ font-size:clamp(1.05rem,2vw,1.3rem); color:var(--ink-soft); font-weight:500; max-width:46ch; margin:0 0 16px; }
+  .hero-summary{ color:var(--steel); max-width:60ch; margin:0 0 30px; }
+  .hero-actions{ display:flex; flex-wrap:wrap; gap:14px; }
+
+  .btn{
+    font-family:var(--font-mono); font-size:.85rem; text-transform:uppercase; letter-spacing:.03em;
+    text-decoration:none; padding:12px 20px; border:1.5px solid transparent; cursor:pointer; display:inline-block;
+    transition:transform .15s ease, background .2s ease, color .2s ease, border-color .2s ease;
+  }
+  .btn:active{ transform:translateY(1px); }
+  .btn-primary{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
+  .btn-primary:hover{ background:var(--accent); border-color:var(--accent); color:#1a1006; }
+  .btn-ghost{ border-color:var(--line-strong); color:var(--ink); background:transparent; }
+  .btn-ghost:hover{ border-color:var(--ink); }
+
+  .titleblock{
+    border:1px solid var(--line-strong); background:var(--paper-raised); font-family:var(--font-mono);
+    font-size:.78rem; box-shadow:var(--shadow);
+  }
+  .tb-row{ display:flex; justify-content:space-between; gap:10px; padding:9px 12px; border-bottom:1px solid var(--line); }
+  .tb-row:last-child{ border-bottom:none; }
+  .tb-key{ color:var(--steel); text-transform:uppercase; letter-spacing:.05em; font-size:.68rem; }
+  .tb-val{ color:var(--ink); text-align:right; }
+
+  @media (max-width: 820px){
+    .hero .container{ grid-template-columns:1fr; }
+    .titleblock{ max-width:340px; }
+  }
+
+  /* ---------- sections ---------- */
+  .section{ padding:clamp(56px,8vw,96px) 0; border-bottom:1px solid var(--line); }
+  .section.alt{ background:color-mix(in srgb, var(--paper) 92%, var(--ink) 4%); }
+  .section-label{
+    font-family:var(--font-mono); font-size:.78rem; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--steel); padding:2px 0 2px 14px; margin:0 0 14px; display:inline-block;
+  }
+  .section-title{ font-size:clamp(1.8rem,4vw,2.6rem); margin-bottom:34px; max-width:24ch; }
+
+  /* ---------- about ---------- */
+  .about-grid{ display:grid; grid-template-columns:1.3fr 1fr; gap:clamp(28px,5vw,64px); align-items:start; }
+  .about-copy{ font-size:1.08rem; color:var(--ink-soft); max-width:62ch; }
+  .about-copy strong{ color:var(--ink); }
+  .spec-list{ margin:0; border-top:1px solid var(--line); }
+  .spec-list > div{ display:grid; grid-template-columns:110px 1fr; gap:12px; padding:12px 0; border-bottom:1px solid var(--line); }
+  .spec-list dt{ font-family:var(--font-mono); font-size:.75rem; text-transform:uppercase; letter-spacing:.05em; color:var(--steel); }
+  .spec-list dd{ margin:0; font-size:.92rem; }
+  @media (max-width: 820px){ .about-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- timeline ---------- */
+  .timeline{ position:relative; padding-left:28px; }
+  .timeline::before{ content:""; position:absolute; left:5px; top:6px; bottom:6px; width:2px; background:var(--line-strong); }
+  .timeline-item{ position:relative; margin-bottom:14px; border:1px solid var(--line); background:var(--paper-raised); }
+  .timeline-item::before{
+    content:""; position:absolute; left:-28px; top:22px; width:11px; height:11px; border-radius:50%;
+    background:var(--paper-raised); border:2px solid var(--accent);
+  }
+  .timeline-item summary{
+    list-style:none; cursor:pointer; padding:18px 20px; display:flex; gap:16px; align-items:flex-start;
+    justify-content:space-between; flex-wrap:wrap;
+  }
+  .timeline-item summary::-webkit-details-marker{ display:none; }
+  .role-heading{ display:flex; flex-direction:column; gap:4px; }
+  .role-title{ font-family:var(--font-display); font-weight:700; font-size:1.3rem; }
+  .role-company{ color:var(--accent-ink); font-weight:600; font-size:.95rem; }
+  .role-meta{ font-family:var(--font-mono); font-size:.75rem; color:var(--steel); text-align:right; white-space:nowrap; }
+  .role-chevron{
+    font-family:var(--font-mono); font-size:.85rem; color:var(--steel); border:1px solid var(--line-strong);
+    width:26px; height:26px; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:transform .2s ease;
+  }
+  .timeline-item[open] .role-chevron{ transform:rotate(45deg); }
+  .role-body{ padding:0 20px 20px 20px; }
+  .role-body ul{ margin:0; padding-left:1.15em; color:var(--ink-soft); display:grid; gap:8px; }
+  .role-body li::marker{ color:var(--accent); }
+
+  /* ---------- skills ---------- */
+  .skills-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:14px; }
+  .skill-card{ background:var(--paper-raised); border:1px solid var(--line); padding:20px; }
+  .skill-cat{ font-family:var(--font-mono); font-size:.72rem; text-transform:uppercase; letter-spacing:.06em; color:var(--accent-ink); margin:0 0 12px; }
+  .pill-row{ display:flex; flex-wrap:wrap; gap:7px; }
+  .pill{
+    font-size:.8rem; padding:4px 10px; border:1px solid var(--line-strong); border-radius:999px; color:var(--ink-soft);
+    background:var(--paper);
+  }
+
+  /* ---------- projects ---------- */
+  .project-card{ border:1px solid var(--line-strong); background:var(--paper-raised); padding:clamp(24px,4vw,40px); }
+  .project-head{ display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap; margin-bottom:6px; }
+  .project-title{ font-family:var(--font-display); font-size:1.9rem; font-weight:700; }
+  .project-meta{ font-family:var(--font-mono); font-size:.78rem; color:var(--steel); }
+  .project-sub{ color:var(--accent-ink); font-weight:600; margin:0 0 18px; }
+  .project-desc{ color:var(--ink-soft); max-width:68ch; margin:0 0 20px; }
+  .stack-label{ font-family:var(--font-mono); font-size:.72rem; text-transform:uppercase; letter-spacing:.06em; color:var(--steel); display:block; margin-bottom:10px; }
+
+  /* ---------- impact band ---------- */
+  .impact{ background:var(--navy-deep); color:var(--navy-deep-ink); border-bottom:none; }
+  .impact .section-label{ color:var(--navy-deep-steel); }
+  .impact .section-title{ color:var(--navy-deep-ink); }
+  .impact-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px; }
+  .impact-tile{ background:var(--navy-deep); border:1px solid var(--navy-deep-line); padding:22px 20px; }
+  .impact-tag{ font-family:var(--font-mono); font-size:.72rem; color:var(--accent); text-transform:uppercase; letter-spacing:.06em; display:block; margin-bottom:10px; }
+  .impact-tile p{ margin:0; color:var(--navy-deep-ink); font-size:.94rem; }
+
+  /* ---------- education / languages ---------- */
+  .edu-lang-grid{ display:grid; grid-template-columns:1.2fr 1fr; gap:clamp(28px,5vw,64px); }
+  .edu-item{ padding:16px 0; border-bottom:1px solid var(--line); }
+  .edu-item:first-child{ padding-top:0; }
+  .edu-degree{ font-weight:600; }
+  .edu-meta{ font-family:var(--font-mono); font-size:.78rem; color:var(--steel); margin-top:4px; }
+  .lang-row{ display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--line); font-size:.92rem; }
+  .lang-tag{ font-family:var(--font-mono); font-size:.72rem; color:var(--accent-ink); background:var(--accent-soft); padding:2px 8px; }
+  .interest-pills{ margin-top:18px; }
+  @media (max-width: 820px){ .edu-lang-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- contact ---------- */
+  .contact-section{ border-bottom:none; }
+  .contact-inner{ display:grid; grid-template-columns:1.2fr 1fr; gap:clamp(28px,5vw,64px); align-items:start; }
+  .contact-copy p{ color:var(--steel); max-width:52ch; }
+  .contact-card{ border:1px solid var(--line-strong); background:var(--paper-raised); }
+  .contact-row{ display:flex; justify-content:space-between; align-items:center; gap:12px; padding:14px 18px; border-bottom:1px solid var(--line); }
+  .contact-row:last-child{ border-bottom:none; }
+  .contact-row dt{ font-family:var(--font-mono); font-size:.72rem; text-transform:uppercase; color:var(--steel); }
+  .contact-row a{ text-decoration:none; font-size:.92rem; }
+  .contact-row a:hover{ color:var(--accent-ink); }
+  .copy-btn{
+    font-family:var(--font-mono); font-size:.7rem; text-transform:uppercase; background:none; border:1px solid var(--line-strong);
+    padding:4px 8px; cursor:pointer; color:var(--steel);
+  }
+  .copy-btn:hover{ border-color:var(--ink); color:var(--ink); }
+  @media (max-width: 820px){ .contact-inner{ grid-template-columns:1fr; } }
+
+  /* ---------- footer ---------- */
+  .site-footer{ padding:24px 0 40px; }
+  .footer-inner{
+    display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between; align-items:center;
+    font-family:var(--font-mono); font-size:.75rem; color:var(--steel);
+  }
+  .to-top{ background:none; border:1px solid var(--line-strong); color:var(--steel); font-family:var(--font-mono); font-size:.72rem; padding:6px 10px; cursor:pointer; }
+  .to-top:hover{ border-color:var(--ink); color:var(--ink); }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header" id="top">
+  <div class="header-inner">
+    <a class="brand" href="#top" aria-label="Shreyans Patil — home">
+      <span class="brand-mark">SP</span>
+      <span class="brand-code">REV. 2026</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navList">
+        <span></span><span></span><span></span>
+        <span class="sr-only">Toggle menu</span>
+      </button>
+      <ul class="nav-list" id="navList">
+        <li><a href="#about" data-nav>About</a></li>
+        <li><a href="#experience" data-nav>Experience</a></li>
+        <li><a href="#skills" data-nav>Skills</a></li>
+        <li><a href="#projects" data-nav>Projects</a></li>
+        <li><a href="#contact" data-nav>Contact</a></li>
+      </ul>
+    </nav>
+    <a class="header-cta" href="mailto:Sp1092260@gmail.com">Get in touch</a>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero" id="hero">
+    <div class="container">
+      <div>
+        <p class="eyebrow">Product Marketing — CAM / CNC Machining</p>
+        <h1 class="hero-title">Shreyans<br>Patil</h1>
+        <div class="hero-line">
+          <svg class="toolpath-svg" viewBox="0 0 600 40" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M2,30 L120,30 L150,10 L260,10 L290,30 L420,30 L450,6 L520,6 L545,30 L598,30"></path>
+            <circle cx="598" cy="30" r="4.5"></circle>
+          </svg>
+        </div>
+        <p class="hero-role">Turning 5-axis toolpaths into product stories the CAM &amp; PLM world reads.</p>
+        <p class="hero-summary">Product Marketing Manager with 8+ years across manufacturing and CAM software. At ModuleWorks, I run bi-annual release campaigns — scripting technical videos, writing product narratives, and producing content that bridges toolpath engineering with global OEM and end-user audiences. Before marketing, I was the application engineer running the software myself.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="mailto:Sp1092260@gmail.com">Email Shreyans</a>
+          <a class="btn btn-ghost" href="#experience">View experience ↓</a>
+        </div>
+      </div>
+      <aside class="titleblock" aria-label="Profile summary">
+        <div class="tb-row"><span class="tb-key">Role</span><span class="tb-val">Product Marketing Mgr.</span></div>
+        <div class="tb-row"><span class="tb-key">Company</span><span class="tb-val">ModuleWorks GmbH</span></div>
+        <div class="tb-row"><span class="tb-key">Based</span><span class="tb-val">Pune, IN</span></div>
+        <div class="tb-row"><span class="tb-key">Experience</span><span class="tb-val">8+ Years</span></div>
+        <div class="tb-row"><span class="tb-key">Scale</span><span class="tb-val">1:1 Engineer–Marketer</span></div>
+        <div class="tb-row"><span class="tb-key">Rev.</span><span class="tb-val">2026</span></div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="container">
+      <p class="section-label bracketed">Sec. 01 — About</p>
+      <h2 class="section-title">From the shop floor to the release note</h2>
+      <div class="about-grid">
+        <p class="about-copy">Most product marketers learn CAM software from a brief. I learned it from the operator's chair — running pre-sales demos and post-sales training on <strong>SolidCAM</strong> and <strong>Mastercam</strong>, before that, programming <strong>CNC and VMC toolpaths</strong> on the shop floor for oil &amp; gas and automotive components. That sequence is why the release stories I write for ModuleWorks hold up when an OEM engineer or CAM programmer actually reads them: the 5-axis, Swiss-Turn, and Turn-Mill claims are ones I've verified at the machine, not just in the brief.</p>
+        <dl class="spec-list">
+          <div><dt>Currently</dt><dd>Product Marketing Manager, ModuleWorks GmbH</dd></div>
+          <div><dt>Background</dt><dd>Application Engineering — SolidCAM &amp; Mastercam</dd></div>
+          <div><dt>Focus</dt><dd>5-Axis · Swiss-Turn · Turn-Mill · Multi-Axis CNC</dd></div>
+          <div><dt>Location</dt><dd>Pune (Hinjawadi), Maharashtra, India</dd></div>
+          <div><dt>Languages</dt><dd>English · Hindi · Marathi</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="experience">
+    <div class="container">
+      <p class="section-label bracketed">Sec. 02 — Experience</p>
+      <h2 class="section-title">Six roles, one throughline: make the machine understandable</h2>
+
+      <ol class="timeline" style="list-style:none; margin:0;">
+        <li>
+          <details class="timeline-item" open>
+            <summary>
+              <div class="role-heading">
+                <span class="role-title">Product Marketing Manager</span>
+                <span class="role-company">ModuleWorks GmbH</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:14px;">
+                <span class="role-meta">Jan 2024 – Present<br>Pune, Maharashtra, India</span>
+                <span class="role-chevron" aria-hidden="true">+</span>
+              </div>
+            </summary>
+            <div class="role-body">
+              <ul>
+                <li>Lead content strategy and execution for bi-annual software releases — product stories, technical narratives, and marketing collateral covering 5-axis milling, Swiss-Turn, and digital manufacturing modules.</li>
+                <li>Script, storyboard, and produce technical product videos for ModuleWorks' YouTube channel and LinkedIn campaigns, translating CAM engineering features for OEM and end-user audiences.</li>
+                <li>Founded and run <em>The Machining Journal</em>, ModuleWorks' LinkedIn newsletter covering metal cutting innovation, CAD/CAM trends, and product updates.</li>
+                <li>Partner with R&amp;D, sales, and global marketing (Aachen HQ) to align messaging for toolpath components including SmartRoughing, VoluMill, and SolidCAM-integrated modules.</li>
+                <li>Represented product marketing at MIC 2026 (ModuleWorks Insider Conference, Aachen), strengthening relationships with global partners and OEM clients.</li>
+                <li>Write whitepapers, feature briefs, and GTM materials for new product lines targeting CAM/PLM enterprise customers.</li>
+                <li>Use AI tools and automation to speed up content production while keeping marketing messages consistent across channels.</li>
+              </ul>
+            </div>
+          </details>
+        </li>
+        <li>
+          <details class="timeline-item" open>
+            <summary>
+              <div class="role-heading">
+                <span class="role-title">Application Engineer</span>
+                <span class="role-company">SolidCAM India Pvt. Ltd.</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:14px;">
+                <span class="role-meta">Sep 2022 – Jan 2024<br>Pune, Maharashtra, India</span>
+                <span class="role-chevron" aria-hidden="true">+</span>
+              </div>
+            </summary>
+            <div class="role-body">
+              <ul>
+                <li>Delivered pre-sales technical demonstrations of SolidCAM, articulating the value of iMachining, 5-axis milling, and Turn-Mill to engineering and procurement teams.</li>
+                <li>Provided post-sales implementation support and hands-on training, driving adoption and integration into existing CNC workflows.</li>
+                <li>Assessed manufacturing requirements and recommended tailored CAM solutions for automotive, aerospace, and precision engineering clients.</li>
+                <li>Built training materials and documentation for SolidCAM features and upgrades, reducing support tickets.</li>
+                <li>Supported the sales team with technical input for proposals, customer visits, and competitive benchmarking.</li>
+              </ul>
+            </div>
+          </details>
+        </li>
+        <li>
+          <details class="timeline-item">
+            <summary>
+              <div class="role-heading">
+                <span class="role-title">Assistant Application Manager</span>
+                <span class="role-company">Mastercam India (In-House Solutions)</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:14px;">
+                <span class="role-meta">Sep 2021 – Sep 2022<br>Pune, Maharashtra, India</span>
+                <span class="role-chevron" aria-hidden="true">+</span>
+              </div>
+            </summary>
+            <div class="role-body">
+              <ul>
+                <li>Supported presales demos, requirement assessments, and solution design for Mastercam across CNC Lathe, Milling, Turn-Mill, and multi-axis machines.</li>
+                <li>Created CAM programs and toolpath demonstrations validating multi-axis and Swiss-Turn machining scenarios for customer evaluations.</li>
+                <li>Delivered post-sales training and support for new customers, ensuring smooth onboarding.</li>
+                <li>Designed project models in SolidWorks and developed CNC programs for client-specific requirements.</li>
+                <li>Contributed to new project development from concept through implementation alongside senior application managers.</li>
+              </ul>
+            </div>
+          </details>
+        </li>
+        <li>
+          <details class="timeline-item">
+            <summary>
+              <div class="role-heading">
+                <span class="role-title">Sr. Engineer — Manufacturing</span>
+                <span class="role-company">Ultra Engineers</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:14px;">
+                <span class="role-meta">Apr 2019 – Dec 2021<br>Pune, Maharashtra, India</span>
+                <span class="role-chevron" aria-hidden="true">+</span>
+              </div>
+            </summary>
+            <div class="role-body">
+              <ul>
+                <li>Handled precision machining on CNC/VMC machines, programming toolpaths and optimizing cycle times for heavy-duty components in Oil &amp; Gas, Energy, and Automotive.</li>
+                <li>Interpreted engineering drawings and GD&amp;T specifications to ensure dimensional accuracy and ASME/EN compliance.</li>
+                <li>Worked with production teams to troubleshoot machining issues, reduce waste, and improve efficiency.</li>
+              </ul>
+            </div>
+          </details>
+        </li>
+        <li>
+          <details class="timeline-item">
+            <summary>
+              <div class="role-heading">
+                <span class="role-title">Product Development Engineer</span>
+                <span class="role-company">Pune Engineering Cluster</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:14px;">
+                <span class="role-meta">Oct 2017 – Apr 2019<br>Pune, Maharashtra, India</span>
+                <span class="role-chevron" aria-hidden="true">+</span>
+              </div>
+            </summary>
+            <div class="role-body">
+              <ul>
+                <li>Contributed to product design and development projects across the Pune manufacturing ecosystem — mechanical prototypes and production tooling.</li>
+                <li>Gained hands-on experience across the product lifecycle, from design concept to manufacturing validation.</li>
+              </ul>
+            </div>
+          </details>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="skills">
+    <div class="container">
+      <p class="section-label bracketed">Sec. 03 — Skills</p>
+      <h2 class="section-title">Fluent on both sides of the spec sheet</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <p class="skill-cat">CAM Software</p>
+          <div class="pill-row"><span class="pill">SolidCAM</span><span class="pill">Mastercam</span><span class="pill">Autodesk Fusion</span></div>
+        </div>
+        <div class="skill-card">
+          <p class="skill-cat">Machining Technologies</p>
+          <div class="pill-row"><span class="pill">5-Axis Milling</span><span class="pill">Swiss-Turn</span><span class="pill">Turn-Mill</span><span class="pill">Multi-Axis CNC</span></div>
+        </div>
+        <div class="skill-card">
+          <p class="skill-cat">Product Marketing</p>
+          <div class="pill-row"><span class="pill">GTM Strategy</span><span class="pill">Product Positioning</span><span class="pill">Release Campaigns</span><span class="pill">Whitepapers</span><span class="pill">Feature Briefs</span></div>
+        </div>
+        <div class="skill-card">
+          <p class="skill-cat">Content &amp; Video</p>
+          <div class="pill-row"><span class="pill">Technical Scripting</span><span class="pill">Storyboarding</span><span class="pill">LinkedIn Content</span><span class="pill">YouTube Tutorials</span></div>
+        </div>
+        <div class="skill-card">
+          <p class="skill-cat">Technical Communication</p>
+          <div class="pill-row"><span class="pill">Product Documentation</span><span class="pill">Tutorial Writing</span><span class="pill">Newsletter Editing</span></div>
+        </div>
+        <div class="skill-card">
+          <p class="skill-cat">Tools &amp; Platforms</p>
+          <div class="pill-row"><span class="pill">JIRA</span><span class="pill">Excel (Macros)</span><span class="pill">LinkedIn</span><span class="pill">YouTube</span><span class="pill">Meta Ads</span><span class="pill">AI Content Tools</span></div>
+        </div>
+        <div class="skill-card">
+          <p class="skill-cat">Industry Knowledge</p>
+          <div class="pill-row"><span class="pill">CNC Machining</span><span class="pill">GD&amp;T</span><span class="pill">Toolpath Optimization</span><span class="pill">Post-Processor Dev.</span><span class="pill">CAD/CAM/PLM</span></div>
+        </div>
+        <div class="skill-card">
+          <p class="skill-cat">Soft Skills</p>
+          <div class="pill-row"><span class="pill">Cross-functional Collab.</span><span class="pill">Technical Storytelling</span><span class="pill">Customer Engagement</span><span class="pill">Analytical Thinking</span></div>
+        </div>
+        <div class="skill-card">
+          <p class="skill-cat">Web Development</p>
+          <div class="pill-row"><span class="pill">React.js</span><span class="pill">Express.js</span><span class="pill">Tailwind CSS</span><span class="pill">shadcn/ui</span><span class="pill">SQLite / Drizzle ORM</span><span class="pill">REST APIs</span></div>
+        </div>
+        <div class="skill-card">
+          <p class="skill-cat">Deployment &amp; DevOps</p>
+          <div class="pill-row"><span class="pill">Railway</span><span class="pill">Render</span><span class="pill">Docker basics</span><span class="pill">GitHub</span><span class="pill">.env config</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="projects">
+    <div class="container">
+      <p class="section-label bracketed">Sec. 04 — Projects</p>
+      <h2 class="section-title">Side build: automating the marketer's first draft</h2>
+      <div class="project-card">
+        <div class="project-head">
+          <span class="project-title">MessageMorph</span>
+          <span class="project-meta">Personal Project · 2026 · Pune, India</span>
+        </div>
+        <p class="project-sub">AI-powered marketing message transformer</p>
+        <p class="project-desc">A full-stack web app that rewrites marketing copy into different personas and tones. Built the entire stack — React front end, Express API, SQLite via Drizzle ORM — and integrated OpenAI's Chat Completions API (gpt-4o-mini) with structured JSON output so transformations stay consistent across runs. Shipped with a production-ready config: dotenv, Railway/Render deploy targets, and Docker-compatible packaging.</p>
+        <span class="stack-label">Stack</span>
+        <div class="pill-row">
+          <span class="pill">React.js</span><span class="pill">Express.js</span><span class="pill">Tailwind CSS</span>
+          <span class="pill">shadcn/ui</span><span class="pill">SQLite / Drizzle ORM</span><span class="pill">OpenAI API</span>
+          <span class="pill">Docker</span><span class="pill">Railway / Render</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section impact" id="highlights">
+    <div class="container">
+      <p class="section-label bracketed">Sec. 05 — Impact</p>
+      <h2 class="section-title">What the last three release cycles added up to</h2>
+      <div class="impact-grid">
+        <div class="impact-tile">
+          <span class="impact-tag">2024 – 2026</span>
+          <p>Spearheaded product marketing content across three ModuleWorks release cycles, growing OEM partner engagement and digital presence.</p>
+        </div>
+        <div class="impact-tile">
+          <span class="impact-tag">Newsletter</span>
+          <p>Founded and grew <em>The Machining Journal</em> on LinkedIn — a consistent editorial voice for CNC machining insight and product news.</p>
+        </div>
+        <div class="impact-tile">
+          <span class="impact-tag">MIC 2026, Aachen</span>
+          <p>Represented ModuleWorks at the Insider Conference, one of CAM's key global events, building international partnerships.</p>
+        </div>
+        <div class="impact-tile">
+          <span class="impact-tag">Engineer → Marketer</span>
+          <p>Cross-industry background spanning application engineering and product marketing — authentic technical-to-commercial translation.</p>
+        </div>
+        <div class="impact-tile">
+          <span class="impact-tag">AI Workflows</span>
+          <p>Introduced AI-driven content automation to ModuleWorks marketing, speeding up campaign workflows and content repurposing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="education">
+    <div class="container">
+      <p class="section-label bracketed">Sec. 06 — Education &amp; Languages</p>
+      <h2 class="section-title">Grounded in mechanical engineering</h2>
+      <div class="edu-lang-grid">
+        <div>
+          <div class="edu-item">
+            <p class="edu-degree">B.E., Mechanical Engineering</p>
+            <p class="edu-meta">Sou. Sushila Danchand Ghodawat College of Engineering · Kolhapur, Maharashtra · 2010 – 2014</p>
+          </div>
+          <div class="edu-item">
+            <p class="edu-degree">Diploma, Mechanical Engineering</p>
+            <p class="edu-meta">ICRE Gargoti · Maharashtra, India · 2007 – 2010</p>
+          </div>
+          <div class="interest-pills">
+            <span class="stack-label">Interests</span>
+            <div class="pill-row">
+              <span class="pill">CNC Machining Innovation</span>
+              <span class="pill">CAM Software Trends</span>
+              <span class="pill">Technical Content Creation</span>
+              <span class="pill">Digital Manufacturing</span>
+              <span class="pill">LinkedIn Thought Leadership</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <span class="stack-label">Languages</span>
+          <div class="lang-row"><span>English</span><span class="lang-tag">Professional</span></div>
+          <div class="lang-row"><span>Hindi</span><span class="lang-tag">Fluent</span></div>
+          <div class="lang-row"><span>Marathi</span><span class="lang-tag">Native</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section contact-section" id="contact">
+    <div class="container">
+      <p class="section-label bracketed">Sec. 07 — Contact</p>
+      <h2 class="section-title">Working on a release story, a demo script, or a CAM/PLM launch?</h2>
+      <div class="contact-inner">
+        <div class="contact-copy">
+          <p>I'm always glad to talk toolpath marketing, CAM/CNC content, or the occasional side project. Reach out directly — I read everything myself.</p>
+        </div>
+        <dl class="contact-card">
+          <div class="contact-row">
+            <dt>Email</dt>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <a href="mailto:Sp1092260@gmail.com">Sp1092260@gmail.com</a>
+              <button class="copy-btn" id="copyEmail" type="button" data-email="Sp1092260@gmail.com">Copy</button>
+            </div>
+          </div>
+          <div class="contact-row">
+            <dt>Phone</dt>
+            <a href="tel:+919075940896">+91 90759 40896</a>
+          </div>
+          <div class="contact-row">
+            <dt>LinkedIn</dt>
+            <a href="https://www.linkedin.com/in/shreyans-patil-42b61a82" target="_blank" rel="noopener">linkedin.com/in/shreyans-patil</a>
+          </div>
+          <div class="contact-row">
+            <dt>Location</dt>
+            <span>Pune (Hinjawadi), Maharashtra, India</span>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <span>© <span id="year"></span> Shreyans Patil</span>
+    <span>Product Marketing · CAM &amp; CNC Machining</span>
+    <button class="to-top" id="toTop" type="button">↑ Top</button>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // mobile nav toggle
+  var navToggle = document.getElementById('navToggle');
+  var navList = document.getElementById('navList');
+  navToggle.addEventListener('click', function(){
+    var open = navList.classList.toggle('is-open');
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navList.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      navList.classList.remove('is-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // scroll-spy
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-list a[data-nav]'));
+  var sections = navLinks.map(function(a){ return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+  if ('IntersectionObserver' in window && sections.length){
+    var spy = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var link = navLinks.find(function(a){ return a.getAttribute('href') === '#' + entry.target.id; });
+        if (!link) return;
+        if (entry.isIntersecting){
+          navLinks.forEach(function(a){ a.classList.remove('is-active'); });
+          link.classList.add('is-active');
+        }
+      });
+    }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+    sections.forEach(function(s){ spy.observe(s); });
+  }
+
+  // copy email
+  var copyBtn = document.getElementById('copyEmail');
+  copyBtn.addEventListener('click', function(){
+    var email = copyBtn.getAttribute('data-email');
+    var done = function(){ var old = copyBtn.textContent; copyBtn.textContent = 'Copied'; setTimeout(function(){ copyBtn.textContent = old; }, 1600); };
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(email).then(done).catch(function(){});
+    }
+  });
+
+  // back to top
+  var toTop = document.getElementById('toTop');
+  toTop.addEventListener('click', function(){
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+</body>
+</html>
